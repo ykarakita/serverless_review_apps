@@ -1,1 +1,1 @@
-aws-sam-cli
+requests
