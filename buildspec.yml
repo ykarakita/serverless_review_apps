@@ -5,14 +5,16 @@ phases:
     commands:
       - pip install aws-sam-cli==0.6.1
 
-  build:
-    commands:
+  pre_build:
+    commands: 
       - PR=`echo $CODEBUILD_WEBHOOK_TRIGGER | sed -e 's/\///'`
       - APP_NAME=my-review-apps-$PR
-
       - aws s3 ls s3://$APP_NAME
+    finally:
       - if [ $? != 0 ]; then aws s3 mb s3://$APP_NAME; fi
 
+  build:
+    commands:
       - pip install -r requirements.txt -t hello_world/build
       - cp hello_world/*.py hello_world/build/
 
