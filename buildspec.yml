@@ -7,6 +7,6 @@ phases:
 
   build:
     commands:
-      - PR=`echo $CODEBUILD_WEBHOOK_TRIGGER | sed -e 's/\///'
+      - PR=`echo $CODEBUILD_WEBHOOK_TRIGGER | sed -e 's/\///'`
       - APP_NAME=my-review-apps-$PR
       - aws s3 mb $APP_NAME
