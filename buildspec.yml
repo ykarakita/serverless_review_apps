@@ -13,5 +13,7 @@ phases:
       - aws s3 ls s3://$APP_NAME
       - if [ $? != 0 ]; then aws s3 mb s3://$APP_NAME; fi
 
+      - cp hello_world/*.py hello_world/build/
+
       - sam package --template-file template.yaml --output-template-file serverless-output.yaml --s3-bucket $APP_NAME
       - sam deploy --template-file ./serverless-output.yaml --stack-name $APP_NAME --capabilities CAPABILITY_IAM
